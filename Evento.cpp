@@ -25,6 +25,6 @@ Datagrama *Evento::getDatagrama() {
 }
 
 void Evento::imprimir() {
-  cout << "O instante e " << instante << endl;
+  cout << "O instante corresponde a " << instante << endl;
 }
 */

@@ -7,21 +7,21 @@ using namespace std;
 
 class Fila {
 private:
-    Datagrama **fila;
-    int tamanho;
-    int inicio;
-    int fim;
-    int quantidade;
+  Datagrama **fila;
+  int tamanho;
+  int inicio;
+  int fim;
+  int quantidade;
 public:
-    Fila(int tamanho);
-    ~Fila();
+  Fila(int tamanho);
+  ~Fila();
 
-    bool enqueue(Datagrama* d);
-    Datagrama* dequeue();
-    bool isEmpty();
-    int getSize();
+  bool enqueue(Datagrama* d);
+  Datagrama* dequeue();
+  bool isEmpty();
+  int getSize();
 
-    void imprimir();
+  void imprimir();
 };
 
 #endif

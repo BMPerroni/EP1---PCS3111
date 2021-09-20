@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Fila.h"
 
-
 Fila::Fila(int tamanho) :
 tamanho(tamanho) {
   inicio = 0;

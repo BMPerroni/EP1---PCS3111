@@ -21,6 +21,10 @@ void Teste() { /*Acho que dá pra ir testando as coisas por aqui*/
   Datagrama *over = new Datagrama(2, 4, "overflow");
   f->enqueue(over);
   f->imprimir();
+  f->dequeue();
+  f->imprimir();
+  f->enqueue(over);
+  f->imprimir();
   delete f;
 
 }
