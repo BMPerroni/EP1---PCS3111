@@ -1,12 +1,12 @@
+#ifndef DATAGRAMA_H
+#define DATAGRAMA_H
+
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-#ifndef DATAGRAMA_H
-#define DATAGRAMA_H
-
-class Datagrama{
+class Datagrama {
 private:
   int origem;
   int destino;

@@ -1,4 +1,4 @@
-/*#ifndef EVENTO_H
+#ifndef EVENTO_H
 #define EVENTO_H
 
 #include "Datagrama.h"
@@ -6,8 +6,8 @@
 
 using namespace std;
 
-class Roteador; /*Dependência circular*/
-/*
+class Roteador;
+
 class Evento {
 private:
     int instante;
@@ -25,4 +25,3 @@ public:
 };
 
 #endif
-*/

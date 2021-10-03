@@ -10,7 +10,7 @@ tamanho(tamanho) {
   fila = new Datagrama*[tamanho]; 
 }
 
-Fila::~Fila(){
+Fila::~Fila() {
   int passador;
   passador = 0;
 

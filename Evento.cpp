@@ -1,10 +1,9 @@
-/*#include <iostream>
+#include <iostream>
 
 #include "Evento.h"
 
-
 Evento::Evento(int instante, Roteador *destino, Datagrama *d) :
-instante(instante), Roteador *destino(Roteador *destino), Datagrama *d(Datagrama *d) {
+instante(instante), destino(destino), d(d) {
 
 }
 
@@ -27,4 +26,4 @@ Datagrama *Evento::getDatagrama() {
 void Evento::imprimir() {
   cout << "O instante corresponde a " << instante << endl;
 }
-*/
+

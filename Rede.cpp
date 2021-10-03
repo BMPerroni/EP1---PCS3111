@@ -1,4 +1,4 @@
-/*#include <iostream>
+#include <iostream>
 
 #include "Rede.h"
 
@@ -73,4 +73,4 @@ void Rede::imprimir() {
     cout << "O numero maximo de roteadores foi atingido!" << endl;
   }
 }
-*/
+
