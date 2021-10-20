@@ -29,8 +29,8 @@ bool TabelaDeRepasse::mapear(int endereco, Roteador* adjacente, int atraso) {
     return false;
 
   for (int i = 0; i < posicao; i++) {
-      if (enderecos[i] == endereco)   //endereco já está na tabela
-        return false;
+    if (enderecos[i] == endereco)   //endereco já está na tabela
+      return false;
   }
 
   enderecos[posicao] = endereco;

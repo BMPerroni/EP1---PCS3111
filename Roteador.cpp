@@ -41,7 +41,7 @@ Evento* Roteador::processar(int instante) {
   cout << "Roteador " << getEndereco() << endl;   //acompanhamento - inicio
 
   Datagrama* d = fila->dequeue();
-  if (d->getDestino() == this->endereco) {    //destino do datagrama eh o endereco do roteador
+  if (d->getDestino() == this->endereco) {   //destino do datagrama eh o endereco do roteador 
 
     cout << "   Recebido: " << d->getDado() << endl;  //acompanhamento
 
@@ -60,14 +60,15 @@ Evento* Roteador::processar(int instante) {
       delete d;
       return NULL;
 
-    } else {
+    } else { 
       int aux = instante + atraso;    //instante que sera de fato passado para o evento
       Evento* e = new Evento(aux, r, d);
-      return e;
 
       // acompanhamento
       cout << "   Repassado para " << r->getEndereco() << " (instante " << aux << "): Origem: ";
       cout << d->getOrigem() << ", Destino: " << d->getDestino() << ", " << d->getDado() << endl;
+         
+      return e;
     }
   }
 }

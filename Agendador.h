@@ -15,6 +15,12 @@ private:
   Evento **listaEventos;
   int quantidade;
   int instanteAtual;
+  int fim;
+  int inicio;
+  bool isEmpty();
+  bool enqueue(Evento *e);
+  Evento *dequeue();
+  
 
 public:
   Agendador(int instanteInicial, Rede *rede, int tamanho);

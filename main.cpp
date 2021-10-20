@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 /*Lembrar de adicionar todas as classes*/
 #include "Agendador.h"
@@ -11,43 +10,20 @@
 
 using namespace std;
 
-void Teste() { /*Acho que dá pra ir testando as coisas por aqui*/
-  Datagrama *d = new Datagrama(2, 4, "1");
-  d->imprimir();
-
-  Fila *f = new Fila(3);
-  f->imprimir();
-  Datagrama *e = new Datagrama(2, 4, "2");
-  Datagrama *g = new Datagrama(2, 4, "3");
-  f->enqueue(d);
-  f->enqueue(e);
-  f->enqueue(g);
-  f->imprimir();
-  Datagrama *over = new Datagrama(2, 4, "overflow");
-  f->enqueue(over);
-  f->imprimir();
-  f->dequeue();
-  f->imprimir();
-  f->enqueue(over);
-  f->imprimir();
-  delete f;
-
-}
-
 int main() {
 
   Rede *redePrincipal = new Rede(6); /*Criação da Rede*/
 
-  Agendador *agenda = new Agendador(1, redePrincipal, 10); /*Criacao do agendador*/
-
-  Roteador *r1 = new Roteador(1); /*Criação dos Roteadores*/
+  /*Criação dos Roteadores*/
+  Roteador *r1 = new Roteador(1); 
   Roteador *r2 = new Roteador(2);
   Roteador *r3 = new Roteador(3);
   Roteador *r4 = new Roteador(4);
   Roteador *r5 = new Roteador(5);
   Roteador *r6 = new Roteador(6);
 
-  r1->mapear(2, r2, 2); /*Mapeamento dos Roteadores*/
+  /*Mapeamento dos Roteadores*/
+  r1->mapear(2, r2, 2); 
   r1->setPadrao(r3, 1);
   r2->mapear(1, r1, 2);
   r2->setPadrao(r4, 1);
@@ -62,18 +38,22 @@ int main() {
   r6->mapear(5, r5, 2);
   r6->setPadrao(r4, 1);
 
-  redePrincipal->adicionar(r1); /*Adicionando roteadores à rede*/
+  /*Adicionando roteadores à rede*/
+  redePrincipal->adicionar(r1); 
   redePrincipal->adicionar(r2);
   redePrincipal->adicionar(r3);
   redePrincipal->adicionar(r4);
   redePrincipal->adicionar(r5);
   redePrincipal->adicionar(r6);
 
-  int Continuar = 1; /*Variável que controla a continuidade do programa*/
+  Agendador *agenda = new Agendador(1, redePrincipal, 10); /*Criacao do agendador*/
+
+  int Continuar = 1; /*Variável que controla a continuidade da interface*/
 
   int variavelReceptora; /*Variável para receber a opção da entrada*/
 
-  int origem; /*Variáveis que guardam as entradas da opção 1*/
+  /*Variáveis que guardam as entradas da opção 1*/
+  int origem; 
   int instante;
   int destino;
   string mensagem;
@@ -81,8 +61,9 @@ int main() {
   int quantidadeTempo; /*Variável que guarda o tempo para a opção 2*/
   int passador; /*Passador para a opção 2*/
 
-  bool verifica; /*Variável que verifica se já esetá cheio de datagramas*/
+  bool verifica; /*Variável que verifica se já está cheio de datagramas*/
 
+  /*Criação da interface*/
   while (Continuar == 1) {
     cout << "Simulador de Rede" << endl;
     cout << "1) Enviar um datagrama" << endl;
@@ -112,20 +93,17 @@ int main() {
 
       if (redePrincipal->getRoteador(origem) == NULL) {
         cout << endl << "Erro: origem desconhecida" << endl;
-    }
-
-      if (redePrincipal->getRoteador(origem) != NULL) {
+      } else {
       
-      d = new Datagrama(origem, destino, mensagem); /*Criação do datagrama*/
+        d = new Datagrama(origem, destino, mensagem); /*Criação do datagrama*/
 
-      verifica = agenda->agendar(instante, redePrincipal->getRoteador(destino), d); /*Agendando o evento do datragama*/
+        verifica = agenda->agendar(instante, redePrincipal->getRoteador(origem), d); /*Agendando o evento do datragama*/
 
-      if (verifica == false) {
-        cout << endl;
-        cout << endl << "Erro: sem espaco para agendar o evento" << endl;
+        if (verifica == false) {
+          cout << endl;
+          cout << endl << "Erro: sem espaco para agendar o evento" << endl;
+        }
       }
-      /*||||||||||Checar os espaços entre linhas|||||||||||*/
-    }
     }
 
     if (variavelReceptora == 2) {
@@ -139,12 +117,11 @@ int main() {
         
         cout << "Instante " << agenda->getInstante() << endl;
         cout << "---" << endl;
-
+        
         agenda->processar();
 
         passador = passador + 1;
       }
-      /*||||||||||Checar os espaços entre linhas|||||||||||*/
     }
 
     if (variavelReceptora == 0) {
