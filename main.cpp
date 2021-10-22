@@ -1,5 +1,5 @@
 #include <string>
-/*Lembrar de adicionar todas as classes*/
+
 #include "Agendador.h"
 #include "Datagrama.h"
 #include "Evento.h"
@@ -114,7 +114,7 @@ int main() {
       cin >> quantidadeTempo;
 
       while (passador < quantidadeTempo) {
-        
+        cout << endl;
         cout << "Instante " << agenda->getInstante() << endl;
         cout << "---" << endl;
         
