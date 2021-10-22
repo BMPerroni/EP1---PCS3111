@@ -9,12 +9,12 @@ using namespace std;
 
 class Agendador {
 private:
-  int instanteInicial;
   Rede *rede;
   int tamanho;
   Evento **listaEventos;
   int quantidade;
   int instanteAtual;
+  int instanteInicial;
   int fim;
   int inicio;
   bool isEmpty();

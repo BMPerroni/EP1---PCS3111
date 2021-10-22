@@ -35,9 +35,9 @@ void Roteador::receber(Datagrama* d) {
 }
 
 Evento* Roteador::processar(int instante) {
-  if (fila->isEmpty())  //fila vazia
+  if (fila->isEmpty()) //fila vazia
     return NULL;
-
+  
   cout << "Roteador " << getEndereco() << endl;   //acompanhamento - inicio
 
   Datagrama* d = fila->dequeue();

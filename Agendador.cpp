@@ -23,29 +23,27 @@ Agendador::~Agendador() {
 
 bool Agendador::agendar(int instante, Roteador *r, Datagrama *d) {
   Evento *e = new Evento(instante, r, d);
-  
-  return enqueue(e);
+  bool teste = enqueue(e);
+
+  return teste;
 }
 
 void Agendador::processar() {
   
   Evento *a;
-  for (int i=0; i < tamanho; i++){
-    a = dequeue();
-    if (a != NULL) {
-      if (a->getInstante() == instanteAtual) {
-        a->getDestino()->receber(a->getDatagrama()); 
+  int quantidadeFixa = quantidade;
+  if (quantidadeFixa > 0) {
+    for (int i=0; i < quantidadeFixa; i++){
+      a = dequeue(); 
+      if (a->getInstante() == getInstante()) {
+        a->getDestino()->receber(a->getDatagrama());
         delete a;
       } else {
         enqueue(a);
       }
-    } else {
-      enqueue(a);
-      if (inicio == fim && listaEventos[0] == NULL) {
-        quantidade = 0;
-      }
     }
   }
+
   
   int passador;
   passador = 0;    
@@ -53,6 +51,7 @@ void Agendador::processar() {
   
   while (passador < rede->getQuantidade()) {
     e = rede->getRoteadores()[passador]->processar(instanteAtual);
+    
     if (e != NULL) {
       agendar(e->getInstante(), e->getDestino(), e->getDatagrama());
     }
@@ -72,10 +71,10 @@ bool Agendador::enqueue(Evento *e) {
     if (fim == tamanho-1) {
       fim = 0;
     } else {
-      fim = fim + 1;
+      fim++;
     }
     
-    quantidade = quantidade + 1;
+    quantidade++;
     
     return true;
   } else {
@@ -86,15 +85,15 @@ bool Agendador::enqueue(Evento *e) {
 Evento *Agendador::dequeue() {
   Evento *memoria;
 
-  if (quantidade >0) {
+  if (quantidade > 0) {
     memoria = listaEventos[inicio];
 
-    if (inicio == tamanho) {
+    if (inicio == tamanho-1) {
       inicio = 0;
     } else {
-      inicio = inicio + 1;
+      inicio++;
     }
-    quantidade = quantidade - 1;
+    quantidade--;
 
     return memoria;
   } else {

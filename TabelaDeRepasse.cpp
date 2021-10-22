@@ -1,7 +1,5 @@
 #include <iostream>
-
 #include "TabelaDeRepasse.h"
-#include "Roteador.h"
 
 using namespace std;
 

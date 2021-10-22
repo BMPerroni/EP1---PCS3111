@@ -29,10 +29,10 @@ bool Fila::enqueue(Datagrama *d) {
     if (fim == tamanho-1) {
       fim = 0;
     } else {
-      fim = fim + 1;
+      fim++;
     }
 
-    quantidade = quantidade + 1;
+    quantidade++;
 
     return true;
   } else {
@@ -46,13 +46,13 @@ Datagrama *Fila::dequeue() {
   if (quantidade > 0) {
     memoria = fila[inicio];
 
-    if (inicio == tamanho) {
+    if (inicio == tamanho-1) {
       inicio = 0;
     } else {
-      inicio = inicio + 1;
+      inicio++;
     }
 
-    quantidade = quantidade - 1;
+    quantidade--;
 
     return memoria;
   } else {
