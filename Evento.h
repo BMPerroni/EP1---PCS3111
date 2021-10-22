@@ -10,18 +10,18 @@ class Roteador;
 
 class Evento {
 private:
-    int instante;
-    Roteador* destino;
-    Datagrama* d;
+  int instante;
+  Roteador* destino;
+  Datagrama* d;
 public:
-    Evento(int instante, Roteador *destino, Datagrama *d);
-    ~Evento();
+  Evento(int instante, Roteador *destino, Datagrama *d);
+  ~Evento();
 
-    int getInstante();
-    Roteador* getDestino();
-    Datagrama* getDatagrama();
+  int getInstante();
+  Roteador* getDestino();
+  Datagrama* getDatagrama();
 
-    void imprimir();
+  void imprimir();
 };
 
 #endif

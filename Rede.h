@@ -9,7 +9,7 @@ class Rede {
 private:
   int tamanho;
   int quantidade;
-  Roteador **ListaRoteadores;
+  Roteador **listaRoteadores;
 public:
   Rede(int tamanho);
   ~Rede();

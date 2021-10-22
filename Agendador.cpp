@@ -4,14 +4,10 @@
 
 Agendador::Agendador (int instanteInicial, Rede *rede, int tamanho) :  instanteInicial(instanteInicial), rede(rede), tamanho(tamanho) {
   listaEventos = new Evento*[tamanho];
-
-  for (int i=0; i<tamanho; i++) {
-    listaEventos[i] = NULL;
-  }
   
   quantidade = 0;
   inicio = 0;
-  fim =0;
+  fim = 0;
   instanteAtual = instanteInicial;
 }
 
@@ -26,59 +22,13 @@ Agendador::~Agendador() {
 }
 
 bool Agendador::agendar(int instante, Roteador *r, Datagrama *d) {
-  bool retornar;
-  int passador;
-
-  /*if (quantidade == tamanho) {
-    return false;
-  }
-
-  else {
-    passador = 0;
-    Evento *e = new Evento(instante, r, d);
-    while (passador < tamanho) {
-      if (listaEventos[passador] == NULL) {
-        listaEventos[passador] = e;
-        quantidade = quantidade + 1;
-        break;
-      }
-      passador = passador +1;
-    }
-  }
-  return true;*/
   Evento *e = new Evento(instante, r, d);
-  retornar = enqueue(e);
-  return retornar;
+  
+  return enqueue(e);
 }
 
 void Agendador::processar() {
   
-  /*int passador = 0;
-    int contador;
-  while (passador < tamanho) {
-    if (listaEventos[passador] != NULL && listaEventos[passador]->getInstante() == instanteAtual) {
-      
-      listaEventos[passador]->getDestino()->receber(listaEventos[passador]->getDatagrama());
-
-      delete listaEventos[passador];
-
-      quantidade = quantidade - 1; 
-
-      if (passador == 0) {
-        contador = 0;
-        while (contador < quantidade) {
-          listaEventos[contador] = listaEventos[contador+1]
-          
-        }
-        listaEventos[contador] = NULL;
-      }
-
-      listaEventos[passador] = NULL;
-          
-         
-    }
-    passador = passador + 1;
-  } */ 
   Evento *a;
   for (int i=0; i < tamanho; i++){
     a = dequeue();
@@ -106,9 +56,9 @@ void Agendador::processar() {
     if (e != NULL) {
       agendar(e->getInstante(), e->getDestino(), e->getDatagrama());
     }
-    passador = passador + 1;
+    passador++;
   }
-  instanteAtual = instanteAtual + 1;
+  instanteAtual++;
 }
 
 int Agendador::getInstante() {
@@ -121,12 +71,10 @@ bool Agendador::enqueue(Evento *e) {
 
     if (fim == tamanho-1) {
       fim = 0;
-    }
-
-    else {
+    } else {
       fim = fim + 1;
     }
-
+    
     quantidade = quantidade + 1;
     
     return true;

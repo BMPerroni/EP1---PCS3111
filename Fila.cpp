@@ -14,14 +14,12 @@ Fila::~Fila() {
   int passador;
   passador = 0;
 
-  while (passador < quantidade)
-  {
-     delete fila[passador];
-     passador = passador + 1;
+  while (passador < quantidade) {
+    delete fila[passador];
+    passador = passador + 1;
   }
 
-   delete[] fila;
-  
+  delete[] fila;
 }
 
 bool Fila::enqueue(Datagrama *d) {
@@ -30,42 +28,34 @@ bool Fila::enqueue(Datagrama *d) {
 
     if (fim == tamanho-1) {
       fim = 0;
-    }
-
-    else {
+    } else {
       fim = fim + 1;
     }
 
     quantidade = quantidade + 1;
 
     return true;
-  }
-  else {
+  } else {
     return false;
   }
-
 }
 
 Datagrama *Fila::dequeue() {
   Datagrama *memoria;
 
-  if (quantidade >0) {
+  if (quantidade > 0) {
     memoria = fila[inicio];
 
     if (inicio == tamanho) {
       inicio = 0;
-    }
-
-    else {
+    } else {
       inicio = inicio + 1;
     }
 
     quantidade = quantidade - 1;
 
     return memoria;
-  }
-
-  else {
+  } else {
     return NULL;
   }
 }
@@ -73,9 +63,7 @@ Datagrama *Fila::dequeue() {
 bool Fila::isEmpty() {
   if (quantidade == 0) {
     return true;
-  }
-
-  else {
+  } else {
     return false;
   }
 }

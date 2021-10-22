@@ -12,6 +12,7 @@ private:
   int inicio;
   int fim;
   int quantidade;
+  
 public:
   Fila(int tamanho);
   ~Fila();

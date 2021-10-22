@@ -5,7 +5,7 @@
 Rede::Rede(int tamanho) :
 tamanho(tamanho) {
   quantidade = 0;
-  ListaRoteadores = new Roteador*[tamanho];
+  listaRoteadores = new Roteador*[tamanho];
 }
 
 Rede::~Rede() {
@@ -13,11 +13,11 @@ Rede::~Rede() {
   passador = 0;
 
   while (passador < quantidade) {
-    delete ListaRoteadores[passador];
+    delete listaRoteadores[passador];
     passador = passador + 1;
   }
 
-  delete[] ListaRoteadores;
+  delete[] listaRoteadores;
 }
 
 bool Rede::adicionar(Roteador *d) {
@@ -27,20 +27,18 @@ bool Rede::adicionar(Roteador *d) {
   if (quantidade < tamanho) {
 
     while (passador < quantidade) {
-      if (ListaRoteadores[passador]->getEndereco() == d->getEndereco()) {
+      if (listaRoteadores[passador]->getEndereco() == d->getEndereco()) {
         return false;
       }
-      passador = passador + 1;
+      passador++;
     }
 
-    ListaRoteadores[quantidade] = d;
+    listaRoteadores[quantidade] = d;
 
-    quantidade = quantidade + 1;
+    quantidade++;
 
     return true;  
-  }
-  
-  else {
+  } else {
     return false;
   }
 }
@@ -50,8 +48,8 @@ Roteador *Rede::getRoteador(int endereco) {
   passador = 0;
 
   while (passador < quantidade) {
-    if (ListaRoteadores[passador]->getEndereco() == endereco) {
-      return ListaRoteadores[passador];
+    if (listaRoteadores[passador]->getEndereco() == endereco) {
+      return listaRoteadores[passador];
     }
     passador = passador + 1;
   }
@@ -60,7 +58,7 @@ Roteador *Rede::getRoteador(int endereco) {
 }
 
 Roteador **Rede::getRoteadores() {
-  return ListaRoteadores;
+  return listaRoteadores;
 }
 
 int Rede::getQuantidade() {
