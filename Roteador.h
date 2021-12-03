@@ -3,30 +3,25 @@
 
 #include "TabelaDeRepasse.h"
 #include "Fila.h"
-#define TAMANHO 10
+#include "No.h"
 
-//dependencia circular
-class TabelaDeRepasse;
-class Evento;
-
-class Roteador {
+class Roteador : public No {
 private:
-  int endereco;
   TabelaDeRepasse *tabela;
-  Fila *fila;
+
+protected:
+  Roteador(int endereco, Fila* fila);
 
 public:
   Roteador(int endereco);
-  ~Roteador();
+  virtual ~Roteador();
 
-  bool mapear(int endereco, Roteador* adjacente, int atraso);
-  void setPadrao(Roteador* padrao, int atraso);
+  virtual void mapear(int endereco, No* adjacente, int atraso);
+  virtual void setPadrao(Roteador* padrao, int atraso);
 
-  int getEndereco();
-  void receber(Datagrama* d);
   Evento* processar(int instante);
 
-  void imprimir();
+  static const int TAMANHO_TABELA = 10;
 };
 
 #endif // ROTEADOR_H

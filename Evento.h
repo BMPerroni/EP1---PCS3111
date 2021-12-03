@@ -2,24 +2,24 @@
 #define EVENTO_H
 
 #include "Datagrama.h"
-#include "Roteador.h"
+#include "No.h"
 
 using namespace std;
 
-class Roteador;
+class No;
 
 class Evento {
 private:
   int instante;
-  Roteador* destino;
+  No* destino;
   Datagrama* d;
 public:
-  Evento(int instante, Roteador *destino, Datagrama *d);
-  ~Evento();
+  Evento(int instante, No *destino, Datagrama *d);
+  virtual ~Evento();
 
-  int getInstante();
-  Roteador* getDestino();
-  Datagrama* getDatagrama();
+  virtual int getInstante();
+  virtual No* getDestino();
+  virtual Datagrama* getDatagrama();
 
   void imprimir();
 };

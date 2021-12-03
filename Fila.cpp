@@ -1,13 +1,26 @@
 #include <iostream>
+#include <stdexcept>
 #include "Fila.h"
 
 Fila::Fila(int tamanho) :
 tamanho(tamanho) {
+  if (tamanho <= 0) {
+    throw new invalid_argument ("Tamanho invalido");
+  }
   inicio = 0;
   fim = 0;
-  quantidade = 0; 
+  quantidade = 0;
+  fila = new Datagrama*[tamanho];
 
-  fila = new Datagrama*[tamanho]; 
+  vetorPrioridades = new int[tamanho];
+
+  int passador = 0;
+
+  while (passador < tamanho) {
+    vetorPrioridades[passador] = infinito;
+    passador++;
+  }
+
 }
 
 Fila::~Fila() {
@@ -22,7 +35,7 @@ Fila::~Fila() {
   delete[] fila;
 }
 
-bool Fila::enqueue(Datagrama *d) {
+void Fila::enqueue(Datagrama *d) {
   if (quantidade != tamanho) {
     fila[fim] = d;
 
@@ -31,12 +44,9 @@ bool Fila::enqueue(Datagrama *d) {
     } else {
       fim++;
     }
-
     quantidade++;
-
-    return true;
   } else {
-    return false;
+    throw new overflow_error ("A fila esta cheia");
   }
 }
 
@@ -46,6 +56,10 @@ Datagrama *Fila::dequeue() {
   if (quantidade > 0) {
     memoria = fila[inicio];
 
+    if (vetorPrioridades[inicio] != infinito) {
+        vetorPrioridades[inicio] = infinito;
+    }
+
     if (inicio == tamanho-1) {
       inicio = 0;
     } else {
@@ -54,9 +68,11 @@ Datagrama *Fila::dequeue() {
 
     quantidade--;
 
+
     return memoria;
+
   } else {
-    return NULL;
+    throw new underflow_error ("A fila esta vazia");
   }
 }
 
@@ -77,5 +93,5 @@ void Fila::imprimir() {
   if (isEmpty() == true) {
     cout << "A fila esta vazia!" << endl;
   }
-  
+
 }

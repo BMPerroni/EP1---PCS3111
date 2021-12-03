@@ -1,28 +1,29 @@
 #ifndef FILA_H
 #define FILA_H
-
+#define infinito 100000000
 #include "Datagrama.h"
 
 using namespace std;
 
 class Fila {
-private:
+protected:
   Datagrama **fila;
   int tamanho;
   int inicio;
   int fim;
   int quantidade;
-  
+  int *vetorPrioridades;
+
 public:
   Fila(int tamanho);
-  ~Fila();
+  virtual ~Fila();
 
-  bool enqueue(Datagrama* d);
-  Datagrama* dequeue();
-  bool isEmpty();
-  int getSize();
+  virtual void enqueue(Datagrama* d);
+  virtual Datagrama* dequeue();
+  virtual bool isEmpty();
+  virtual int getSize();
 
-  void imprimir();
+  virtual void imprimir();
 };
 
 #endif

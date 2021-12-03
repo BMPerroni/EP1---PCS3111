@@ -23,11 +23,11 @@ private:
   
 public:
   Agendador(int instanteInicial, Rede *rede, int tamanho);
-  ~Agendador();
+  virtual~Agendador();
 
-  bool agendar(int instante, Roteador *r, Datagrama *d);
-  void processar();
-  int getInstante();
+  virtual bool agendar(int instante, No *n, Datagrama *d);
+  virtual void processar();
+  virtual int getInstante();
 };
 
 #endif // AGENDADOR_H

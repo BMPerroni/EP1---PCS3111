@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "Segmento.h"
 
 using namespace std;
 
@@ -10,16 +11,17 @@ class Datagrama {
 private:
   int origem;
   int destino;
-  string dado;
+  Segmento* dado;
 
 public:
-  Datagrama(int origem, int destino, string dado);
-  ~Datagrama();
+  Datagrama(int origem, int destino, Segmento* dado);
+  virtual ~Datagrama();
 
-  int getOrigem();
-  int getDestino();
-  string getDado();
-  void imprimir();
+  virtual int getOrigem();
+  virtual int getDestino();
+  virtual Segmento* getSegmento();
+
+  virtual void imprimir();
 };
 
 #endif // DATAGRAMA_H

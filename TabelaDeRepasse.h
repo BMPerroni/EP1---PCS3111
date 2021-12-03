@@ -1,9 +1,7 @@
 #ifndef TABELADEREPASSE_H
 #define TABELADEREPASSE_H
 
-#include "Roteador.h"
-
-class Roteador; //dependencia circular
+#include "No.h"
 
 class TabelaDeRepasse {
 private:
@@ -11,26 +9,26 @@ private:
 
   int *enderecos;  //vetor de enderecos
   int *atrasos;    //vetor de atrasos
-  Roteador **roteadoresAdj;   //vetor de reteadores adjacentes
+  No **nosAdj;   //vetor de reteadores adjacentes
 
   int posicao; //variável de controle dos vetores
 
-  Roteador *padrao;
+  No *padrao;
   int atrasoPadrao;   //atraso do roteador padrao
 
 public:
   TabelaDeRepasse(int tamanho);
-  ~TabelaDeRepasse();
+  virtual ~TabelaDeRepasse();
 
-  bool mapear(int endereco, Roteador* adjacente, int atraso);
-  Roteador** getAdjacentes();
-  int getQuantidadeDeAdjacentes();
+  virtual void mapear(int endereco, No* adjacente, int atraso);
+  virtual No** getAdjacentes();
+  virtual int getQuantidadeDeAdjacentes();
 
-  void setPadrao(Roteador* padrao, int atraso);
+  virtual void setPadrao(No* padrao, int atraso);
 
-  Roteador* getProximoSalto(int endereco, int& atraso);
+  virtual No* getProximoSalto(int endereco, int& atraso);
 
-  void imprimir();
+  virtual void imprimir();
 };
 
 #endif // TABELADEREPASSE_H

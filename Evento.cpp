@@ -2,8 +2,7 @@
 
 #include "Evento.h"
 
-Evento::Evento(int instante, Roteador *destino, Datagrama *d) :
-instante(instante), destino(destino), d(d) {
+Evento::Evento(int instante, No *destino, Datagrama *d) : instante(instante), destino(destino), d(d) {
 
 }
 
@@ -15,7 +14,7 @@ int Evento::getInstante() {
   return instante;
 }
 
-Roteador *Evento::getDestino() {
+No *Evento::getDestino() {
   return destino;
 }
 
@@ -24,6 +23,6 @@ Datagrama *Evento::getDatagrama() {
 }
 
 void Evento::imprimir() {
-  cout << "O instante corresponde a " << instante << endl;
+  cout << "O instante corresponde a " << instante << " com datagrama " << d->getSegmento()->getDado() << " e destino " << "Pode colocar informação de no" << endl;
 }
 

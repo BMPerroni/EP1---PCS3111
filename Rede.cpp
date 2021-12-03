@@ -1,74 +1,70 @@
 #include <iostream>
-
+#include <stdexcept>
 #include "Rede.h"
 
-Rede::Rede(int tamanho) :
-tamanho(tamanho) {
-  quantidade = 0;
-  listaRoteadores = new Roteador*[tamanho];
+Rede::Rede() {
+  listaNos = new list<No*>();
 }
 
 Rede::~Rede() {
-  int passador;
-  passador = 0;
-
-  while (passador < quantidade) {
-    delete listaRoteadores[passador];
-    passador = passador + 1;
+  while (!listaNos->empty()) {
+    No *a = listaNos->back();
+    listaNos->pop_back();
+    delete a;
   }
 
-  delete[] listaRoteadores;
+  delete listaNos;
 }
 
-bool Rede::adicionar(Roteador *d) {
-  int passador;
-  passador = 0;
+void Rede::adicionar(No *n) {
+  list<No*>::iterator i = listaNos->begin();
 
-  if (quantidade < tamanho) {
-
-    while (passador < quantidade) {
-      if (listaRoteadores[passador]->getEndereco() == d->getEndereco()) {
-        return false;
-      }
-      passador++;
+  while (i != listaNos->end()) {
+    if ((*i)->getEndereco() == n->getEndereco()) {
+      throw new logic_error("No ja adicionado!");
     }
+    i++;
+   }
 
-    listaRoteadores[quantidade] = d;
+  listaNos->push_back(n);
 
-    quantidade++;
-
-    return true;  
-  } else {
-    return false;
-  }
 }
 
-Roteador *Rede::getRoteador(int endereco) {
-  int passador;
-  passador = 0;
+No * Rede::getNo(int endereco) {
+  list<No*>::iterator i = listaNos->begin();
 
-  while (passador < quantidade) {
-    if (listaRoteadores[passador]->getEndereco() == endereco) {
-      return listaRoteadores[passador];
+  while (i != listaNos->end()) {
+    if ((*i)->getEndereco() == endereco) {
+      return (*i);
     }
-    passador = passador + 1;
-  }
+    i++;
+   }
 
-  return NULL;
+   return NULL;
 }
 
-Roteador **Rede::getRoteadores() {
-  return listaRoteadores;
+list<Hospedeiro*>* Rede::getHospedeiros() {
+  list <Hospedeiro*>* listaHospedeiros = new list<Hospedeiro*>();
+
+  list<No*>::iterator i = listaNos->begin();
+
+  while (i != listaNos->end()) {
+    Hospedeiro *h = dynamic_cast<Hospedeiro*>(*i);
+    if (h != NULL) {
+      listaHospedeiros->push_back(h);
+    }
+    i++;
+   }
+
+   return listaHospedeiros;
 }
 
-int Rede::getQuantidade() {
-  return quantidade;
+list<No*>* Rede::getNos() {
+  return listaNos;
 }
+
 
 void Rede::imprimir() {
-  cout << "Existem" << getQuantidade() << "roteador(es)" << endl;
-  if (getQuantidade() == tamanho) {
-    cout << "O numero maximo de roteadores foi atingido!" << endl;
-  }
+  cout << "Rede com: " << listaNos->size() << "nos e " << getHospedeiros()->size() << "hospedeiros";  
 }
 

@@ -1,6 +1,8 @@
 #include <iostream>
 
 #include "Agendador.h"
+#include <list>
+#include <iterator>
 
 Agendador::Agendador (int instanteInicial, Rede *rede, int tamanho) :  instanteInicial(instanteInicial), rede(rede), tamanho(tamanho) {
   listaEventos = new Evento*[tamanho];
@@ -21,15 +23,14 @@ Agendador::~Agendador() {
   delete [] listaEventos;
 }
 
-bool Agendador::agendar(int instante, Roteador *r, Datagrama *d) {
-  Evento *e = new Evento(instante, r, d);
+bool Agendador::agendar(int instante, No *n, Datagrama *d) {
+  Evento *e = new Evento(instante, n, d);
   bool teste = enqueue(e);
 
   return teste;
 }
 
 void Agendador::processar() {
-  
   Evento *a;
   int quantidadeFixa = quantidade;
   if (quantidadeFixa > 0) {
@@ -43,23 +44,19 @@ void Agendador::processar() {
       }
     }
   }
-
-  
-  int passador;
-  passador = 0;    
   Evento *e;
   
-  while (passador < rede->getQuantidade()) {
-    e = rede->getRoteadores()[passador]->processar(instanteAtual);
-    
+  list<No*>::iterator i = rede->getNos()->begin();
+  while (i != rede->getNos()->end()) {
+    e = (*i)->processar(instanteAtual);
     if (e != NULL) {
       agendar(e->getInstante(), e->getDestino(), e->getDatagrama());
     }
-    passador++;
+    
+    i++;
   }
   instanteAtual++;
 }
-
 int Agendador::getInstante() {
   return instanteAtual;
 }

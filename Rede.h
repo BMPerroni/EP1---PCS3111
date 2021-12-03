@@ -2,24 +2,25 @@
 #define REDE_H
 
 #include "Roteador.h"
+#include "No.h"
+#include "Hospedeiro.h"
+#include <list>
 
 using namespace std;
 
 class Rede {
 private:
-  int tamanho;
-  int quantidade;
-  Roteador **listaRoteadores;
+  list<No*>* listaNos;
 public:
-  Rede(int tamanho);
-  ~Rede();
+  Rede();
+  virtual ~Rede();
 
-  bool adicionar(Roteador *r);
-  Roteador *getRoteador(int endereco);
-  Roteador **getRoteadores();
-  int getQuantidade();
+  virtual void adicionar(No *n);
+  virtual No *getNo(int endereco);
+  virtual list<No*>* getNos();
+  virtual list<Hospedeiro*>* getHospedeiros();
 
-  void imprimir();
+  virtual void imprimir();
   
 };
 

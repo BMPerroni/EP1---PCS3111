@@ -4,13 +4,14 @@
 
 using namespace std;
 
-Datagrama::Datagrama(int origem, int destino, string dado) {
+Datagrama::Datagrama(int origem, int destino, Segmento* dado) {
   this->origem = origem;
   this->destino = destino;
   this->dado = dado;
 }
 
 Datagrama::~Datagrama() {
+  delete dado;
 }
 
 int Datagrama::getOrigem() {
@@ -21,10 +22,10 @@ int Datagrama::getDestino() {
   return destino;
 }
 
-string Datagrama::getDado() {
+Segmento* Datagrama::getSegmento() {
   return dado;
 }
 
 void Datagrama::imprimir() {
-  cout << "Datagrama com origem " << getOrigem() << " e destino " << getDestino() << " contendo " << getDado() << endl;
+  cout << "Datagrama com origem " << getOrigem() << " e destino " << getDestino() << " contendo " << getSegmento() << endl;
 }

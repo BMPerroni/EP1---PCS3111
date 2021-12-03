@@ -1,11 +1,14 @@
 #include <iostream>
+#include <stdexcept>
+
 #include "TabelaDeRepasse.h"
 
 using namespace std;
 
-TabelaDeRepasse::TabelaDeRepasse(int tamanho) {
-  this->tamanho = tamanho;
-
+TabelaDeRepasse::TabelaDeRepasse(int tamanho) : tamanho(tamanho) {
+  if(tamanho <= 0) 
+    throw new invalid_argument ("Tamanho invalido");
+  
   padrao = NULL;
   atrasoPadrao = 0;
 
@@ -13,51 +16,49 @@ TabelaDeRepasse::TabelaDeRepasse(int tamanho) {
 
   enderecos = new int [tamanho];
   atrasos = new int [tamanho];
-  roteadoresAdj = new Roteador* [tamanho];
+  nosAdj = new No* [tamanho];
 }
 
 TabelaDeRepasse::~TabelaDeRepasse() {
   delete[] enderecos;
   delete[] atrasos;
-  delete[] roteadoresAdj;
+  delete[] nosAdj;
 }
 
-bool TabelaDeRepasse::mapear(int endereco, Roteador* adjacente, int atraso) {
+void TabelaDeRepasse::mapear(int endereco, No* adjacente, int atraso) {
   if (posicao == tamanho) //vetores cheios
-    return false;
+    throw new overflow_error ("nosAdj estourou");
 
   for (int i = 0; i < posicao; i++) {
     if (enderecos[i] == endereco)   //endereco já está na tabela
-      return false;
+      throw new invalid_argument ("Endereco ja adicionado");
   }
 
   enderecos[posicao] = endereco;
   atrasos[posicao] = atraso;
-  roteadoresAdj[posicao] = adjacente;
+  nosAdj[posicao] = adjacente;
 
   posicao++;
-
-  return true;
 }
 
-Roteador** TabelaDeRepasse::getAdjacentes() {
-  return roteadoresAdj;
+No** TabelaDeRepasse::getAdjacentes() {
+  return nosAdj;
 }
 
 int TabelaDeRepasse::getQuantidadeDeAdjacentes() {
   return posicao;
 }
 
-void TabelaDeRepasse::setPadrao(Roteador* padrao, int atraso) {
+void TabelaDeRepasse::setPadrao(No* padrao, int atraso) {
   this->padrao = padrao;
   atrasoPadrao = atraso;
 }
 
-Roteador* TabelaDeRepasse::getProximoSalto(int endereco, int& atraso) {
+No* TabelaDeRepasse::getProximoSalto(int endereco, int& atraso) {
   for (int i = 0; i < posicao; i++) {
     if (enderecos[i] == endereco){
       atraso = atrasos[i];
-      return roteadoresAdj[i];
+      return nosAdj[i];
     }
   }
 
@@ -68,6 +69,6 @@ Roteador* TabelaDeRepasse::getProximoSalto(int endereco, int& atraso) {
 void TabelaDeRepasse::imprimir() {
   cout << "Tabela de repasse com tamanho " << tamanho << " possui: " << endl;
   for (int i = 0; i < posicao; i++) {
-    cout << "Roteador " << roteadoresAdj[i] << " - Endereco " << enderecos[i] << " - Atraso " << atrasos[i] << endl;
+    cout << "No " << nosAdj[i] << " - Endereco " << enderecos[i] << " - Atraso " << atrasos[i] << endl;
   }
 }
