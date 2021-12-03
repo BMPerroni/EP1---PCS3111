@@ -81,9 +81,9 @@ int main() {
         if (hospedeiro->getChat(portaChat) == NULL) {
           cout << "Erro: origem desconhecida" << endl;
         } else {
-          cout << hospedeiro->getChat(portaChat)->getTextoCompleto() << endl;
+          cout << hospedeiro->getChat(portaChat)->getTextoCompleto();
         }
-
+        cout << endl;
         cout << "Mensagem: ";
         cin >> mensagem;
 
@@ -95,7 +95,6 @@ int main() {
 
         cout << "Quantidade de tempo: ";
         cin >> quantidadeTempo;
-        cout << endl;
 
         for (int i = 1; i <= quantidadeTempo; i++) {
           cout << '\n';
