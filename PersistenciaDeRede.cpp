@@ -33,7 +33,7 @@ Rede* PersistenciaDeRede::carregar() {
     string identificadorRot;
     entrada >> identificadorRot;
 
-    if (!entrada.good()) {
+    if (!entrada.good() && (identificadorRot == "r" || identificadorRot == "q")) {
       entrada.close();
       throw new logic_error ("Entrada invalida!");
     }
