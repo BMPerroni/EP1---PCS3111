@@ -55,12 +55,7 @@ Evento* Hospedeiro::processar(int instante) {
         cout << "\t\tMensagem recebida" << endl;
         cout << vetorChat->at(i)->getTextoCompleto();
         return NULL;
-      } /*else {
-        cout << "\tSem chat: Origem: " << d->getOrigem() << ":" << d->getSegmento()->getPortaDeOrigem() 
-        << ", Destino: " << d->getDestino() << ":" << d->getSegmento()->getPortaDeDestino() << ", " 
-        << d->getSegmento()->getDado() << endl;
-        delete d;
-      }*/
+      } 
     }
     cout << "\tSem chat: Origem: " << d->getOrigem() << ":" << d->getSegmento()->getPortaDeOrigem() 
     << ", Destino: " << d->getDestino() << ":" << d->getSegmento()->getPortaDeDestino() << ", " 

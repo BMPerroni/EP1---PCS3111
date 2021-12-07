@@ -217,4 +217,3 @@ Rede* PersistenciaDeRede::carregar() {
   }
   return rede;
 }
-

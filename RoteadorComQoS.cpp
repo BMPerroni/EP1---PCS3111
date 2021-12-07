@@ -22,11 +22,6 @@ void RoteadorComQoS::receber(Datagrama *d) {
     cout << " Fila em " << getEndereco() << " estourou" << endl;
   }
   int Continuar = 1;
-  /*cout << "INFORMACOES DATAGRAMA:" << endl;
-  cout << d->getOrigem() << endl;
-  cout << d->getDestino() << endl;
-  cout << d->getSegmento()->getPortaDeDestino() << endl;
-  cout << d->getSegmento()->getPortaDeOrigem() << endl;*/
   for (unsigned int i = 0; i < vetorPrioridades->size(); i++) {
     if  (vetorPrioridades->at(i) == d->getDestino()) {
       filaPrioridade->enqueue(d, true);
@@ -37,9 +32,3 @@ void RoteadorComQoS::receber(Datagrama *d) {
     filaPrioridade->enqueue(d, false);
   }
 }
-
-
-
-
-
-

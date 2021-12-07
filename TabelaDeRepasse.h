@@ -9,12 +9,12 @@ private:
 
   int *enderecos;  //vetor de enderecos
   int *atrasos;    //vetor de atrasos
-  No **nosAdj;   //vetor de reteadores adjacentes
+  No **nosAdj;   //vetor de nos adjacentes
 
   int posicao; //variável de controle dos vetores
 
   No *padrao;
-  int atrasoPadrao;   //atraso do roteador padrao
+  int atrasoPadrao;   //atraso do no padrao
 
 public:
   TabelaDeRepasse(int tamanho);

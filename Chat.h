@@ -2,7 +2,7 @@
 #define CHAT_H
 
 #include "Datagrama.h"
-#include "Hospedeiro.h" /*Ver se não precisa colocar todos os includes*/
+#include "Hospedeiro.h" 
 
 using namespace std;
 
